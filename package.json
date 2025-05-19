@@ -20,9 +20,9 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.51.0",
     "airtable": "^0.12.2",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "openai": "^4.100.0"
   }
 }
