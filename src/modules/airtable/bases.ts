@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import Airtable from "airtable";
+import { z } from "zod";
 
 const apiKey = process.env.AIRTABLE_API_KEY;
 if (!apiKey) {
@@ -13,6 +14,13 @@ Airtable.configure({ apiKey });
 export const listBases = {
   description: "List all Airtable bases accessible with this API key",
   parameters: {},
+  outputSchema: z.object({
+    bases: z.array(z.object({
+      id: z.string(),
+      name: z.string(),
+      permissionLevel: z.enum(['none', 'read', 'comment', 'edit', 'create'])
+    }))
+  }),
   handler: async () => {
     try {
       const response = await fetch("https://api.airtable.com/v0/meta/bases", {

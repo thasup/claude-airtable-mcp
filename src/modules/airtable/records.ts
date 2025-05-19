@@ -2,6 +2,18 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import Airtable from "airtable";
+import { z } from "zod";
+
+const recordSchema = z.object({
+  id: z.string(),
+  fields: z.record(z.any()),
+  createdTime: z.string()
+});
+
+const deleteRecordSchema = z.object({
+  id: z.string(),
+  deleted: z.boolean()
+});
 
 const apiKey = process.env.AIRTABLE_API_KEY;
 if (!apiKey) {
@@ -12,6 +24,9 @@ Airtable.configure({ apiKey });
 
 export const listRecords = {
   description: "List records from an Airtable table",
+  outputSchema: z.object({
+    records: z.array(recordSchema)
+  }),
   parameters: {
     baseId: {
       type: "string",
@@ -159,6 +174,7 @@ export const createRecord = {
 
 export const updateRecord = {
   description: "Update an existing record in an Airtable table",
+  outputSchema: recordSchema,
   parameters: {
     baseId: {
       type: "string",
@@ -205,6 +221,7 @@ export const updateRecord = {
 
 export const deleteRecord = {
   description: "Delete a record from an Airtable table",
+  outputSchema: deleteRecordSchema,
   parameters: {
     baseId: {
       type: "string",

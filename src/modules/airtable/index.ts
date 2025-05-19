@@ -19,6 +19,7 @@ export const airtableTools = {
   "airtable/list-bases": {
     description: listBases.description,
     parameters: listBases.parameters,
+    outputSchema: listBases.outputSchema,
     handler: adaptHandler(listBases.handler),
   },
   "airtable/list-tables": {
