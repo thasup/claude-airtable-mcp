@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import Airtable from "airtable";
 
 const apiKey = process.env.AIRTABLE_API_KEY;

@@ -1,11 +1,8 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
-
-import { airtableTools } from "./modules/airtable/index"; // Import new modular airtable tools
-
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
+
+import { airtableTools } from "./modules/airtable/index"; // Import new modular airtable tools
 
 const NWS_API_BASE = "https://api.weather.gov";
 const USER_AGENT = "weather-app/1.0";
@@ -95,7 +92,7 @@ server.tool(
   {
     state: z.string().length(2).describe("Two-letter state code (e.g. CA, NY)"),
   },
-  async ({ state }) => {
+  async ({ state }: { state: string }) => {
     const stateCode = state.toUpperCase();
     const alertsUrl = `${NWS_API_BASE}/alerts?area=${stateCode}`;
     const alertsData = await makeNWSRequest<AlertsResponse>(alertsUrl);
@@ -148,7 +145,7 @@ server.tool(
       .max(180)
       .describe("Longitude of the location"),
   },
-  async ({ latitude, longitude }) => {
+  async ({ latitude, longitude }: { latitude: number; longitude: number }) => {
     // Get grid point data
     const pointsUrl = `${NWS_API_BASE}/points/${latitude.toFixed(4)},${longitude.toFixed(4)}`;
     const pointsData = await makeNWSRequest<PointsResponse>(pointsUrl);
