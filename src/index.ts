@@ -1,6 +1,7 @@
-// Old airtable-tools import removed
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-import { airtableTools } from "./modules/airtable/index.js"; // Import new modular airtable tools
+import { airtableTools } from "./modules/airtable/index"; // Import new modular airtable tools
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -163,7 +164,7 @@ server.tool(
       };
     }
 
-    const forecastUrl = pointsData.properties?.forecast;
+    const forecastUrl = pointsData?.properties?.forecast;
     if (!forecastUrl) {
       return {
         content: [
@@ -228,7 +229,7 @@ server.tool(
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("Weather MCP Server running on stdio");
+  console.error("My Custom MCP Server running on stdio");
 }
 
 main().catch((error) => {
