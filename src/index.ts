@@ -1,5 +1,5 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { McpServer } from "@modelcontextprotocol/sdk";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk";
 import { z } from "zod";
 
 import { airtableTools } from "./modules/airtable/index"; // Import new modular airtable tools
@@ -161,7 +161,7 @@ server.tool(
       };
     }
 
-    const forecastUrl = pointsData?.properties?.forecast;
+    const forecastUrl = pointsData && pointsData.properties && pointsData.properties.forecast;
     if (!forecastUrl) {
       return {
         content: [
@@ -186,7 +186,7 @@ server.tool(
       };
     }
 
-    const periods = forecastData.properties?.periods || [];
+    const periods = forecastData && forecastData.properties && forecastData.properties.periods || [];
     if (periods.length === 0) {
       return {
         content: [

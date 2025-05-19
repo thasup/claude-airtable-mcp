@@ -1,0 +1,14 @@
+{
+    "name": "claude-airtable-mcp",
+    "version": "1.0.0",
+    "description": "Airtable integration for Claude using Model Context Protocol",
+    "main": "dist/index.js",
+    "type": "mcp-server",
+    "commands": {
+        "start": "node dist/index.js"
+    },
+    "capabilities": {
+        "tools": true
+    },
+    "displayName": "Airtable MCP"
+}

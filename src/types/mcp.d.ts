@@ -1,7 +1,19 @@
 declare module '@modelcontextprotocol/sdk' {
+  export interface ServerConfig {
+    name: string;
+    version: string;
+  }
+
+  export interface ToolOptions {
+    name: string;
+    description: string;
+    parameters: any;
+    handler: (args: any, context: any) => Promise<any>;
+  }
+
   export class McpServer {
-    constructor(config: { name: string; version: string });
-    tool(name: string, description: string, schema: any, handler: Function): void;
+    constructor(config: ServerConfig);
+    tool(name: string, description: string, parameters: any, handler: (args: any, context: any) => Promise<any>): void;
     connect(transport: any): Promise<void>;
   }
 
