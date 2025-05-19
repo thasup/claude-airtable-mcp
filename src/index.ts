@@ -1,5 +1,5 @@
-import { McpServer } from "@modelcontextprotocol/sdk";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 
 import { airtableTools } from "./modules/airtable/index"; // Import new modular airtable tools
